@@ -16,6 +16,8 @@ private:
     std::vector<std::vector<uint>> order_csrs_;
     std::vector<std::vector<uint>> order_offs_;
 
+    std::vector<std::vector<uint>> matches;
+
 public:
     Graphflow(Graph& query_graph, Graph& data_graph, uint max_num_results,
             bool print_prep, bool print_enum, bool homo);
