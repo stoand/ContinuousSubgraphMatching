@@ -7,6 +7,11 @@
 #include "graph/graph.h"
 #include "matching/matching.h"
 
+struct Match {
+    std::vector<uint> items;
+    bool add;
+};
+
 class Graphflow : public matching
 {
 private:
@@ -15,6 +20,8 @@ private:
     std::vector<std::vector<uint>> order_vs_;
     std::vector<std::vector<uint>> order_csrs_;
     std::vector<std::vector<uint>> order_offs_;
+
+    bool add_mode;
 
 public:
     Graphflow(Graph& query_graph, Graph& data_graph, uint max_num_results,
@@ -31,7 +38,7 @@ public:
     
     void GetMemoryCost(size_t &num_edges, size_t &num_vertices) override;
 
-    std::vector<std::vector<uint>> matches;
+    std::vector<Match> matches;
 
 private:
     void GenerateMatchingOrder();

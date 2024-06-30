@@ -256,7 +256,8 @@ void Graphflow::FindMatches(uint order_index, uint depth, std::vector<uint> m, s
                 std::cout << std::endl;
             }
             std::vector<uint> clone_m(m);
-            matches.push_back(clone_m);
+            struct Match new_match = { clone_m, add_mode };
+            matches.push_back(new_match);
         }
         else
         {
@@ -296,6 +297,8 @@ void Graphflow::InitialMatching()
 
 void Graphflow::AddEdge(uint v1, uint v2, uint label)
 {
+    add_mode = true;
+    
     data_.AddEdge(v1, v2, label);
 
     std::vector<uint> m(query_.NumVertices(), UNMATCHED);
@@ -357,6 +360,8 @@ void Graphflow::AddEdge(uint v1, uint v2, uint label)
 
 void Graphflow::RemoveEdge(uint v1, uint v2)
 {
+    add_mode = false;
+    
     std::vector<uint> m(query_.NumVertices(), UNMATCHED);
 
     std::tuple labels = data_.GetEdgeLabel(v1, v2);
