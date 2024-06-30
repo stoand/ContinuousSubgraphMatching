@@ -296,8 +296,6 @@ void Graphflow::InitialMatching()
 
 void Graphflow::AddEdge(uint v1, uint v2, uint label)
 {
-    matches.clear();
-    
     data_.AddEdge(v1, v2, label);
 
     std::vector<uint> m(query_.NumVertices(), UNMATCHED);
@@ -359,8 +357,6 @@ void Graphflow::AddEdge(uint v1, uint v2, uint label)
 
 void Graphflow::RemoveEdge(uint v1, uint v2)
 {
-    matches.clear();
-    
     std::vector<uint> m(query_.NumVertices(), UNMATCHED);
 
     std::tuple labels = data_.GetEdgeLabel(v1, v2);
